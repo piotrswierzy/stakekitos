@@ -1,0 +1,18 @@
+{
+    "stacks": {
+      "nodeUrl": "https://stacks-node.example.com",
+      "pox": {
+        "address": "SP000000000000000000002Q6VF78",
+        "name": "pox"
+      }
+    },
+    "ethereum": {
+      "rpcUrl": "https://mainnet.infura.io/v3/YOUR_INFURA_KEY",
+      "stakingContractAddress": "0xYourEthStakingContract"
+    },
+    "cosmos": {
+      "grpcUrl": "https://lcd-cosmos-mainnet.example.com",
+      "chainId": "cosmoshub-4"
+    }
+  }
+  
