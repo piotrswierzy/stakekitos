@@ -5,7 +5,8 @@ import {
   makeRandomPrivKey,
   publicKeyToAddress,
 } from '@stacks/transactions';
-import { STACKS_MAINNET } from '@stacks/network';
+import { generateWallet } from '@stacks/wallet-sdk';
+import { STACKS_MAINNET, STACKS_TESTNET } from '@stacks/network';
 import { ec as EC } from 'elliptic';
 
 const pluginFactory = new PluginFactory();
@@ -21,19 +22,9 @@ program
   .requiredOption("-a, --address <addr>")
   .requiredOption("-n, --amount <amt>")
   .action(async opts => {
-    
-    const privateKey = makeRandomPrivKey();  
-    console.log('Private key (hex):', privateKey);
-    const secp = new EC('secp256k1');
-    const keyPair    = secp.keyFromPrivate(privateKey, 'hex');
-    const compressed = keyPair.getPublic(true, 'hex');
-    console.log(compressed);
-    console.log('Public key (hex):', compressed);
-    const mainnetAddr = publicKeyToAddress(compressed, STACKS_MAINNET);
-    console.log('Stacks address:', mainnetAddr);
     const provider = await pluginFactory.getProvider("stacks");
-    const receipt = await provider.delegate(opts.address, new BigNumber(opts.amount), '', { publicKey: compressed });
-    console.log("TX ID:", receipt.txBytes);
+    const receipt = await provider.delegate(opts.address, new BigNumber(opts.amount), '');
+    console.log(receipt);
   });
 
 program.parse(process.argv);

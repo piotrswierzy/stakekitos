@@ -1,8 +1,8 @@
 {
     "stacks": {
-      "nodeUrl": "https://stacks-node.example.com",
+      "nodeUrl": "https://stacks-node-api.testnet.stacks.co",
       "pox": {
-        "address": "SP000000000000000000002Q6VF78",
+        "address": "ST000000000000000000002AMW42H",
         "name": "pox"
       }
     },

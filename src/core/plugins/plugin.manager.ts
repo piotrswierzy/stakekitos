@@ -8,7 +8,6 @@ import { PendingAction } from './staking-types';
 // Mapping of chain IDs to provider factory functions
 const providerFactories: Record<string, () => IStakingProvider> = {
   // Single 'stacks' entry handles both mainnet and testnet via configuration
-  'stacks': () => new (require('../../adapters/stacks/stacks.provider').StacksProvider)(),
   // Add other chains here, e.g.: 'ethereum': () => new EthereumProvider(),
 };
 

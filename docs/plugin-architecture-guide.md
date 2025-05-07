@@ -34,7 +34,7 @@ export interface IStakingProvider {
     amount: BigNumber,
     validator: string,
     opts?: StakingOptions
-  ): Promise<string>;
+  ): Promise<UnsignedTx>;
 
   /**
    * Build an unsigned transaction to undelegate or revoke tokens.
@@ -43,7 +43,7 @@ export interface IStakingProvider {
     delegator: string,
     amount: BigNumber,
     opts?: StakingOptions
-  ): Promise<string>;
+  ): Promise<UnsignedTx>;
 
   /**
    * Retrieve current staking position, rewards, and next available actions.

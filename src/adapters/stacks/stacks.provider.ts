@@ -39,7 +39,6 @@ export class StacksProvider implements IStakingProvider {
     _validator: string,
     options?: StakingOptions
   ): Promise<UnsignedTx> {
-    console.log("validator", _validator);
     if (!options?.publicKey) {
       throw new Error("Public key is required for Stacks delegation");
     }
