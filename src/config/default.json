@@ -1,0 +1,7 @@
+{
+    "cosmos": {
+      "grpcUrl": "https://lcd-cosmos-mainnet.example.com",
+      "chainId": "cosmoshub-4"
+    }
+  }
+  
