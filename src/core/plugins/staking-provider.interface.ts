@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { TxReceipt, DelegationInfo, PendingTransaction, UnsignedTx, StakingOptions } from './staking-types';
+import { TxReceipt, DelegationInfo, PendingTransaction, UnsignedTx, StakingOptions, Validator } from './staking-types';
 
 export interface IStakingProvider {
   /** Load network-specific config */
@@ -19,4 +19,7 @@ export interface IStakingProvider {
 
   /** Execute one of the PendingActions returned by `queryDelegation` */
   executeTransaction(action: PendingTransaction): Promise<TxReceipt>;
+
+  /** Get the list of validators */
+  getValidators(): Promise<Validator[]>;
 }

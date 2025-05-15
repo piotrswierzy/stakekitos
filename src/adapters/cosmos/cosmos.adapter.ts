@@ -3,7 +3,8 @@ import { CosmosConfig, CosmosMessage, MsgDelegateDefinition, MsgUndelegateDefini
 import { MsgDelegate, MsgUndelegate } from 'cosmjs-types/cosmos/staking/v1beta1/tx';
 import { DeliverTxResponse, QueryClient, StargateClient, setupDistributionExtension, setupStakingExtension } from '@cosmjs/stargate';
 import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
-import { QueryDelegatorDelegationsResponse } from 'cosmjs-types/cosmos/staking/v1beta1/query';
+import { QueryValidatorsResponse } from 'cosmjs-types/cosmos/staking/v1beta1/query';
+
 import { DelegationResponse } from 'cosmjs-types/cosmos/staking/v1beta1/staking';
 import { TxReceipt } from '../../core/plugins/staking-types';
 import { BigNumber } from 'bignumber.js';
@@ -90,5 +91,10 @@ export class CosmosAdapter {
   public async queryTotalStaked(delegatorAddress: string): Promise<BigNumber> {
     const totalStaked = await this.client.getBalanceStaked(delegatorAddress);
     return new BigNumber(totalStaked?.amount || '0');
+  }
+
+  public async queryValidators(): Promise<QueryValidatorsResponse> {
+    const queryClient = QueryClient.withExtensions(this.tmClient, setupStakingExtension);
+    return await queryClient.staking.validators('BOND_STATUS_BONDED'); 
   }
 }

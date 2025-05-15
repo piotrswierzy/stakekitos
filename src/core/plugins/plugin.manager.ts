@@ -10,8 +10,7 @@ import { PendingTransaction } from './staking-types';
 const providerFactories: Record<string, () => IStakingProvider> = {
   // Single 'stacks' entry handles both mainnet and testnet via configuration
   // Add other chains here, e.g.: 'ethereum': () => new EthereumProvider(),
-  'cosmos': () => new CosmosProvider(),
-  'cosmos2': () =>  new (require('../../adapters/cosmos/cosmos.provider').CosmosProvider)()
+  'mantra-dukong-1': () => new CosmosProvider(),
 
 };
 
