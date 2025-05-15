@@ -1,7 +1,6 @@
 {
-    "cosmos": {
-      "rpcUrl": "https://rpc.dukong.mantrachain.io",
-      "chainId": "cosmoshub-4"
-    }
+  "mantra-dukong-1": {
+    "rpcUrl": "https://rpc.dukong.mantrachain.io",
+    "chainId": "mantra-dukong-1"
   }
-  
+}

@@ -48,3 +48,8 @@ export interface PendingTransaction {
   transactionDefinition: string;
   signedTransaction: string;
 }
+
+export interface Validator {
+  name: string;
+  address: string;
+}

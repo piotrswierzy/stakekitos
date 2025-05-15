@@ -1,10 +1,12 @@
 import { BigNumber } from 'bignumber.js';
 import { IStakingProvider } from '../../core/plugins/staking-provider.interface';
-import { Delegation, DelegationInfo, PendingTransaction, StakingOptions, TxReceipt, UnsignedTx } from '../../core/plugins/staking-types';
+import { Delegation, DelegationInfo, PendingTransaction, StakingOptions, TxReceipt, UnsignedTx, Validator } from '../../core/plugins/staking-types';
 import { CosmosAdapter } from './cosmos.adapter';
 import { CosmosConfig } from './cosmos.types';
 import { Registry } from '@cosmjs/proto-signing';
 import { defaultRegistryTypes } from '@cosmjs/stargate';
+import { Validator as ValidatorType } from 'cosmjs-types/cosmos/staking/v1beta1/staking';
+
 
 export class CosmosProvider implements IStakingProvider {
   private adapter!: CosmosAdapter;
@@ -74,5 +76,13 @@ export class CosmosProvider implements IStakingProvider {
       transactionHash: result.transactionHash,
       status: result.code === 0 ? 'success' : 'failed',
     };
+  }
+
+  async getValidators(): Promise<Validator[]> {
+    const validators = await this.adapter.queryValidators();
+    return validators.validators.map((validator: ValidatorType) => ({
+      name: validator.description.moniker,
+      address: validator.operatorAddress,
+    }));
   }
 }
