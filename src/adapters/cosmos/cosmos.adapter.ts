@@ -3,7 +3,7 @@ import { CosmosConfig, CosmosMessage, MsgDelegateDefinition, MsgUndelegateDefini
 import { MsgDelegate, MsgUndelegate } from 'cosmjs-types/cosmos/staking/v1beta1/tx';
 import { DeliverTxResponse, QueryClient, StargateClient, setupDistributionExtension, setupStakingExtension } from '@cosmjs/stargate';
 import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
-import { QueryDelegatorDelegationsResponse, QueryValidatorsResponse } from 'cosmjs-types/cosmos/staking/v1beta1/query';
+import { QueryValidatorsResponse } from 'cosmjs-types/cosmos/staking/v1beta1/query';
 
 import { DelegationResponse } from 'cosmjs-types/cosmos/staking/v1beta1/staking';
 import { TxReceipt } from '../../core/plugins/staking-types';
