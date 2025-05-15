@@ -4,11 +4,10 @@ import { Delegation, DelegationInfo, PendingTransaction, StakingOptions, TxRecei
 import { CosmosAdapter } from './cosmos.adapter';
 import { CosmosConfig } from './cosmos.types';
 import { Registry } from '@cosmjs/proto-signing';
-import { defaultRegistryTypes, StargateClient } from '@cosmjs/stargate';
+import { defaultRegistryTypes } from '@cosmjs/stargate';
 
 export class CosmosProvider implements IStakingProvider {
   private adapter!: CosmosAdapter;
-  private client!: StargateClient;
   private readonly registry: Registry = new Registry(defaultRegistryTypes);
 
   async initialize(config: CosmosConfig): Promise<void> {
@@ -47,9 +46,7 @@ export class CosmosProvider implements IStakingProvider {
 
     const totalStaked = await this.adapter.queryTotalStaked(delegator);
     const pendingStakingRewards = await this.adapter.queryPendingRewards(delegator);
-    console.log('pendingStakingRewards:', pendingStakingRewards);
     const totalPendingStakingRewards = pendingStakingRewards.reduce((acc, reward) => acc.plus(reward.rewards), new BigNumber('0'));
-    console.log('totalPendingStakingRewards:', totalPendingStakingRewards);
 
     return {
       delegations: delegations,
