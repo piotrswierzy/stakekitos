@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Query, Body, BadRequestException } from '@nestjs/common';
 import { YieldsService } from './yields.service';
-import { PendingAction, DelegationInfo, TxReceipt } from '../core/plugins/staking-types';
+import { PendingTransaction, DelegationInfo, TxReceipt } from '../core/plugins/staking-types';
 
 @Controller('yields')
 export class YieldsController {
@@ -13,7 +13,7 @@ export class YieldsController {
   }
 
   @Post('actions')
-  async execAction(@Query('chain') chain: string, @Body() action: PendingAction): Promise<TxReceipt> {
+  async execAction(@Query('chain') chain: string, @Body() action: PendingTransaction): Promise<TxReceipt> {
     if (!chain || !action) throw new BadRequestException('chain & action required');
     return this.svc.execute(chain, action);
   }

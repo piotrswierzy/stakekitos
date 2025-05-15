@@ -1,6 +1,6 @@
 {
     "cosmos": {
-      "grpcUrl": "https://lcd-cosmos-mainnet.example.com",
+      "rpcUrl": "https://rpc.dukong.mantrachain.io",
       "chainId": "cosmoshub-4"
     }
   }

@@ -1,6 +1,6 @@
 import { CosmosProvider } from '../../adapters/cosmos/cosmos.provider';
 import { IStakingProvider } from './staking-provider.interface';
-import { PendingAction } from './staking-types';
+import { PendingTransaction } from './staking-types';
 
 /**
  * Stateless provider factory: returns a fresh, initialized provider per invocation.
@@ -10,7 +10,9 @@ import { PendingAction } from './staking-types';
 const providerFactories: Record<string, () => IStakingProvider> = {
   // Single 'stacks' entry handles both mainnet and testnet via configuration
   // Add other chains here, e.g.: 'ethereum': () => new EthereumProvider(),
-  'cosmos': () => new CosmosProvider()
+  'cosmos': () => new CosmosProvider(),
+  'cosmos2': () =>  new (require('../../adapters/cosmos/cosmos.provider').CosmosProvider)()
+
 };
 
 /**
@@ -47,11 +49,11 @@ export async function queryDelegation(
 /**
  * Convenience wrapper for executing a pending action.
  */
-export async function executeAction(
+export async function executeTransaction(
   chainId: string,
   configs: Record<string, any>,
-  action: PendingAction
+  action: PendingTransaction
 ) {
   const provider = await getProvider(chainId, configs);
-  return provider.executeAction(action);
+  return provider.executeTransaction(action);
 }

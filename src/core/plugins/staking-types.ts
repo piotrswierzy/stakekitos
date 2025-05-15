@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
 
 export interface TxReceipt {
-  txid: string;
+  transactionHash: string;
   status: 'pending' | 'success' | 'failed';
 }
 
@@ -15,18 +15,36 @@ export interface StakingOptions {
 }
 
 export interface UnsignedTx {
+  transactionDefinition: string;
   txBytes: string;
 }
 
+export interface Delegation {
+  delegatorAddress: string;
+  validatorAddress: string;
+  balance: BigNumber;
+}
+
 export interface DelegationInfo {
+  delegations: Delegation[];
   totalStaked: BigNumber;
   pendingRewards: BigNumber;
-  pendingActions: PendingAction[];
+  pendingStakingRewards: PendingStakingReward[];
+}
+
+export interface PendingStakingReward {
+  validatorAddress: string;
+  rewards: BigNumber;
 }
 
 export interface PendingAction {
-  id: string;
-  type: string;
-  passthrough: Record<string, any>;
-  args?: Record<string, any>;
+  providerId: string;
+  transactionDefinition: string;
+  signedTransaction: string;
+}
+
+export interface PendingTransaction {
+  providerId: string;
+  transactionDefinition: string;
+  signedTransaction: string;
 }

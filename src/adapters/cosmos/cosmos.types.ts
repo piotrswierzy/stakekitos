@@ -6,10 +6,15 @@ export const msgWithdrawValidatorCommission = '/cosmos.distribution.v1beta1.MsgW
 export const msgSetWithdrawAddress = '/cosmos.distribution.v1beta1.MsgSetWithdrawAddress';
 
 export interface CosmosMessage {
-    typeUrl: string;
-    value: any;
+  typeUrl: string;
+  value: any;
 }
 
 export interface CosmosConfig {
-    rpcUrl: string;
+  rpcUrl: string;
+}
+
+export interface PendingReward {
+  validatorAddress: string;
+  rewards: any;
 }

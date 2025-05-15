@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { TxReceipt, DelegationInfo, PendingAction, UnsignedTx, StakingOptions } from './staking-types';
+import { TxReceipt, DelegationInfo, PendingTransaction, UnsignedTx, StakingOptions } from './staking-types';
 
 export interface IStakingProvider {
   /** Load network-specific config */
@@ -12,8 +12,11 @@ export interface IStakingProvider {
   queryDelegation(delegator: string): Promise<DelegationInfo>;
 
   /** Stage an undelegation transaction */
-  undelegate(delegator: string, amount: BigNumber, options?: StakingOptions): Promise<UnsignedTx>;
+  undelegate(delegator: string, amount: BigNumber, validator: string, options?: StakingOptions): Promise<UnsignedTx>;
+
+  /** Claim pending staking rewards */
+  claimRewards(delegator: string, validator: string): Promise<UnsignedTx>;
 
   /** Execute one of the PendingActions returned by `queryDelegation` */
-  executeAction(action: PendingAction): Promise<TxReceipt>;
+  executeTransaction(action: PendingTransaction): Promise<TxReceipt>;
 }
